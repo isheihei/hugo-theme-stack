@@ -18,7 +18,9 @@
 {{- end -}}
 
 {{ with .Site.Params.favicon }}
-    <link rel="shortcut icon" href="{{ . }}" />
+    {{ $favicon := resources.Get ( . ) }}
+    {{ $faviconResized := $favicon.Resize "32x" }}
+    <link rel="shortcut icon" href= "{{ $faviconResized.RelPermalink }}" />
 {{ end }}
 
 {{- template "_internal/google_analytics.html" . -}}
